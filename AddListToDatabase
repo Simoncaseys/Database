@@ -1,0 +1,12 @@
+Foreach ($Item in $CleanList) {
+    $Connection  = new-object System.Data.SqlClient.SqlConnection 
+    $Connection.ConnectionString = "server=$SQLServer;database=$SQLDBName;Integrated Security=True;"
+    $Connection.Open()
+    $cmd = new-object system.data.sqlclient.sqlcommand
+    $cmd.CommandText = "INSERT INTO TableName(Rows) VALUES(@Parameters)"
+    $cmd.Connection = $Connection
+    $cmd.Parameters.AddWithValue("@Parameters",  $Item.Parameters.ToString()) 
+    $cmd.ExecuteNonQuery()
+    $Connection.Close()
+    }
+ 
